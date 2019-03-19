@@ -20,9 +20,12 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
  '(global-display-line-numbers-mode t)
+ '(org-agenda-files
+   (quote
+    ("~/Documents/orgs/work.org" "~/Documents/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode org-make-toc quelpa-use-package use-package evil)))
+    (magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode org-make-toc quelpa-use-package use-package evil)))
  '(save-place t)
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
@@ -74,3 +77,8 @@
       (kbd "M-K") 'org-shiftmetaup
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
+
+;; Magit keys
+(use-package magit
+  :config
+  (global-set-key (kbd "C-c g") 'magit-status))
