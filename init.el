@@ -25,7 +25,7 @@
     ("~/Documents/orgs/work.org" "~/Documents/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode org-make-toc quelpa-use-package use-package evil)))
+    (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode org-make-toc quelpa-use-package use-package evil)))
  '(save-place t)
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
@@ -42,6 +42,11 @@
 ;; Vim emulation, please
 (require 'evil)
 (evil-mode 1)
+;; optional: this is the evil state that evil-magit will use
+;; (setq evil-magit-state 'normal)
+;; optional: disable additional bindings for yanking text
+;; (setq evil-magit-use-y-for-yank nil)
+(require 'evil-magit)
 
 ;; check code syntax
 (use-package flycheck
@@ -55,15 +60,15 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-;; Export formats from Org mode
-(require 'ox-md) ;; Markdown
-
 ;; Set base font
 (add-to-list 'default-frame-alist
                        '(font . "Input Mono-16"))
 ;; Force UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
+;; Export formats from Org mode
+(require 'ox-md) ;; Markdown
 
 ;; Remap org-mode meta keys for convenience
 (mapcar (lambda (state)
@@ -77,8 +82,19 @@
       (kbd "M-K") 'org-shiftmetaup
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
+;; org-agenda keymaps
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 ;; Magit keys
 (use-package magit
   :config
   (global-set-key (kbd "C-c g") 'magit-status))
+
+;; Place backup files in a backup folder
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+  )
