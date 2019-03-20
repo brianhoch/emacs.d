@@ -42,11 +42,6 @@
 ;; Vim emulation, please
 (require 'evil)
 (evil-mode 1)
-;; optional: this is the evil state that evil-magit will use
-;; (setq evil-magit-state 'normal)
-;; optional: disable additional bindings for yanking text
-;; (setq evil-magit-use-y-for-yank nil)
-(require 'evil-magit)
 
 ;; check code syntax
 (use-package flycheck
@@ -70,8 +65,8 @@
 ;; Export formats from Org mode
 (require 'ox-md) ;; Markdown
 
-;; Remap org-mode meta keys for convenience
-(mapcar (lambda (state)
+;; Remap org-mode meta keys for Evil convenience
+(mapc (lambda (state)
     (evil-declare-key state org-mode-map
       (kbd "M-l") 'org-metaright
       (kbd "M-h") 'org-metaleft
@@ -90,6 +85,12 @@
   :config
   (global-set-key (kbd "C-c g") 'magit-status))
 
+;; optional: this is the evil state that evil-magit will use
+;; (setq evil-magit-state 'normal)
+;; optional: disable additional bindings for yanking text
+;; (setq evil-magit-use-y-for-yank nil)
+;(require 'evil-magit)
+
 ;; Place backup files in a backup folder
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
   backup-by-copying t    ; Don't delink hardlinks
@@ -98,3 +99,4 @@
   kept-new-versions 20   ; how many of the newest versions to keep
   kept-old-versions 5    ; and how many of the old
   )
+(setq markdown-command "/usr/local/bin/pandoc")
