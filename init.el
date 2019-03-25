@@ -22,10 +22,10 @@
  '(global-display-line-numbers-mode t)
  '(org-agenda-files
    (quote
-    ("~/Documents/orgs/work.org" "~/Documents/orgs/ministry.org")))
+    ("~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode org-make-toc quelpa-use-package use-package evil)))
+    (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
  '(save-place t)
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
@@ -62,10 +62,17 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-;; Export formats from Org mode
+;; Org mode settings ;;
+; settings variables
+(setq org-directory "~/Nextcloud/orgs/")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+; org keys
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+; Export formats from Org mode
 (require 'ox-md) ;; Markdown
-
-;; Remap org-mode meta keys for Evil convenience
+; Remap org-mode meta keys for Evil convenience
 (mapc (lambda (state)
     (evil-declare-key state org-mode-map
       (kbd "M-l") 'org-metaright
@@ -77,8 +84,13 @@
       (kbd "M-K") 'org-shiftmetaup
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
-;; org-agenda keymaps
-(global-set-key (kbd "C-c a") 'org-agenda)
+; Set text fill in org mode
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'flyspell-mode)
+
+;; Markdown mode hooks
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
 
 ;; Magit keys
 (use-package magit
