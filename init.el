@@ -19,16 +19,22 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
- '(global-display-line-numbers-mode t)
+ '(display-line-numbers-type (quote visual))
+ '(display-time-mode nil)
+ '(global-display-line-numbers-mode nil)
+ '(indicate-buffer-boundaries (quote ((top . left) (bottom . right))))
+ '(indicate-empty-lines t)
  '(org-agenda-files
    (quote
-    ("~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/ministry.org")))
+    ("~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
     (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
  '(save-place t)
+ '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
+ '(size-indication-mode nil)
  '(tool-bar-mode nil)
  '(visible-bell t))
 (custom-set-faces
@@ -40,6 +46,8 @@
 ;; End ### AUTO-GENERATED -- DO NOT HAND ALTER ###
 
 ;; Vim emulation, please
+(setq evil-shift-width 2)
+(setq evil-find-skip-newlines t)
 (require 'evil)
 (evil-mode 1)
 
@@ -51,13 +59,16 @@
 ;; Turn off button bar in GUI Emacs
 (tool-bar-mode -1)
 
+;; Spaces, not tabs
+(setq indent-tabs-mode nil)
+
 ;; Show line numbers for vim `{ line number } G` convenience
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
 ;; Set base font
 (add-to-list 'default-frame-alist
-                       '(font . "Input Mono-16"))
+                       '(font . "Input Mono-18"))
 ;; Force UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -69,6 +80,7 @@
 (setq org-todo-keywords
       '((sequence "TODO(t)" "INPROGRESS(p)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
+(setq org-export-with-toc nil)
 ; org keys
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -87,12 +99,16 @@
       (kbd "M-K") 'org-shiftmetaup
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
-; Set text fill in org mode
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
+;; Org mode hooks
+;(add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'flyspell-mode)
-
+(add-hook 'org-mode-hook (lambda ()
+			   (make-local-variable 'evil-auto-indent)
+			   (setq evil-auto-indent nil)))
 ;; Markdown mode hooks
-(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+;(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
 (add-hook 'markdown-mode-hook 'flyspell-mode)
 
 ;; Magit keys
