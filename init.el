@@ -22,7 +22,7 @@
  '(global-display-line-numbers-mode t)
  '(org-agenda-files
    (quote
-    ("~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/ministry.org")))
+    ("~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
     (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
@@ -66,6 +66,9 @@
 ; settings variables
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "INPROGRESS(p)" "WAITING(w)" "|"
+		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; org keys
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
