@@ -34,7 +34,6 @@
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
- '(size-indication-mode nil)
  '(tool-bar-mode nil)
  '(visible-bell t))
 (custom-set-faces
@@ -100,8 +99,8 @@
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
 ;; Org mode hooks
-;(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+;(add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'flyspell-mode)
 (add-hook 'org-mode-hook (lambda ()
 			   (make-local-variable 'evil-auto-indent)
