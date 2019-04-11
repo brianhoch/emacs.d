@@ -19,9 +19,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
- '(display-line-numbers-type (quote visual))
  '(display-time-mode nil)
- '(global-display-line-numbers-mode nil)
  '(indicate-buffer-boundaries (quote ((top . left) (bottom . right))))
  '(indicate-empty-lines t)
  '(org-agenda-files
@@ -29,7 +27,7 @@
     ("~/Nextcloud/orgs/cdl.org" "~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (evil-tutor evil-magit magit evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
+    (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
  '(save-place t)
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
@@ -47,8 +45,19 @@
 ;; Vim emulation, please
 (setq evil-shift-width 2)
 (setq evil-find-skip-newlines t)
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil) ;;Necessary for using evil-collection
+  :config (evil-mode 1))
 (require 'evil)
-(evil-mode 1)
+;; Evil search mode
+(setq evil-magic 'very-magic)
+(evil-select-search-module 'evil-search-module 'evil-search)
+;; Evil collection for widespread evil
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :init (evil-collection-init))
 
 ;; check code syntax
 (use-package flycheck
@@ -86,18 +95,29 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 ; Export formats from Org mode
 (require 'ox-md) ;; Markdown
-; Remap org-mode meta keys for Evil convenience
-(mapc (lambda (state)
-    (evil-declare-key state org-mode-map
-      (kbd "M-l") 'org-metaright
-      (kbd "M-h") 'org-metaleft
-      (kbd "M-k") 'org-metaup
-      (kbd "M-j") 'org-metadown
-      (kbd "M-L") 'org-shiftmetaright
-      (kbd "M-H") 'org-shiftmetaleft
-      (kbd "M-K") 'org-shiftmetaup
-      (kbd "M-J") 'org-shiftmetadown))
-  '(normal insert))
+;; Remap org-mode meta keys for Evil convenience
+;(mapc (lambda (state)
+;    (evil-declare-key state org-mode-map
+;      (kbd "M-l") 'org-metaright
+;      (kbd "M-h") 'org-metaleft
+;      (kbd "M-k") 'org-metaup
+;      (kbd "M-j") 'org-metadown
+;      (kbd "M-L") 'org-shiftmetaright
+;      (kbd "M-H") 'org-shiftmetaleft
+;      (kbd "M-K") 'org-shiftmetaup
+;      (kbd "M-J") 'org-shiftmetadown))
+;  '(normal insert))
+;; Evil Org mode
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 ;; Org mode hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 ;(add-hook 'org-mode-hook 'visual-line-mode)
@@ -119,7 +139,7 @@
 ;; (setq evil-magit-state 'normal)
 ;; optional: disable additional bindings for yanking text
 ;; (setq evil-magit-use-y-for-yank nil)
-;(require 'evil-magit)
+(require 'evil-magit)
 
 ;; Place backup files in a backup folder
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
