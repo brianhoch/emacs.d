@@ -59,6 +59,12 @@
   :after evil
   :init (evil-collection-init))
 
+;; mu4e for email
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+(require 'mu4e)
+(setq mu4e-mu-binary "/usr/local/bin/mu")
+
+
 ;; check code syntax
 (use-package flycheck
   :ensure t
