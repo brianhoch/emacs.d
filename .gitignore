@@ -1,2 +1,7 @@
 games/
 .tutor/
+transient/
+url/
+elpa/
+backup/
+auto-save-list/
