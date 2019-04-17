@@ -82,12 +82,17 @@
 (set-default-coding-systems 'utf-8)
 
 ;; Org mode settings ;;
-; settings variables
+; file locations and todo keywords
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
       '((sequence "TODO(t)" "INPROGRESS(p)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
+; refile targets
+(setq org-refile-targets '(
+			   (nil :maxlevel . 2)
+			   (org-agenda-files :maxlevel . 2)
+			   ))
 (setq org-export-with-toc nil)
 ; org keys
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -95,18 +100,6 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 ; Export formats from Org mode
 (require 'ox-md) ;; Markdown
-;; Remap org-mode meta keys for Evil convenience
-;(mapc (lambda (state)
-;    (evil-declare-key state org-mode-map
-;      (kbd "M-l") 'org-metaright
-;      (kbd "M-h") 'org-metaleft
-;      (kbd "M-k") 'org-metaup
-;      (kbd "M-j") 'org-metadown
-;      (kbd "M-L") 'org-shiftmetaright
-;      (kbd "M-H") 'org-shiftmetaleft
-;      (kbd "M-K") 'org-shiftmetaup
-;      (kbd "M-J") 'org-shiftmetadown))
-;  '(normal insert))
 ;; Evil Org mode
 (use-package evil-org
   :ensure t
