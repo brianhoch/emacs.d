@@ -93,7 +93,7 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "INPROGRESS(p)" "WAITING(w)" "|"
+      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; refile targets
 (setq org-refile-targets '(
@@ -105,6 +105,29 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+
+; Capture templates
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file org-default-notes-file)
+	       "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+	      ("n" "note" entry (file org-default-notes-file)
+	       "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+	      ("m" "Meeting" entry (file org-default-notes-file)
+               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+              ("p" "Phone call" entry (file org-default-notes-file)
+               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+              ;; For Slack and Email captures copy url to item first
+              ("s" "Slack" entry (file org-default-notes-file)
+               "* SLACK %? :SLACK:\n%c\n%U" :clock-in t :clock-resume t)
+              ("e" "Email" entry (file org-default-notes-file)
+               "* EMAIL %? :EMAIL:\n%c\n%U" :clock-in t :clock-resume t)
+              ;; Make sure you've got that link in the clipboard
+              ("l" "link" entry (file org-default-notes-file)
+               "* TODO Review %c\n%U\n" :immediate-finish t)
+              ;("r" "respond" entry (file org-default-notes-file)
+	      ; "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
+              ;; Can't get :from or :subject from Gmail
+	      )))
 ; Export formats from Org mode
 (require 'ox-md) ;; Markdown
 ;; Evil Org mode
