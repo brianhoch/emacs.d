@@ -93,7 +93,7 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|"
+      '((sequence "TODO(t)" "MEETING(m)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; refile targets
 (setq org-refile-targets '(
