@@ -93,7 +93,7 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|"
+      '((sequence "TODO(t)" "MEETING(m)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; refile targets
 (setq org-refile-targets '(
@@ -125,7 +125,7 @@
               ("l" "link" entry (file org-default-notes-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ;("r" "respond" entry (file org-default-notes-file)
-	      ; "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
+	      ; "* TODO Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
               ;; Can't get :from or :subject from Gmail
 	      )))
 ; Export formats from Org mode
