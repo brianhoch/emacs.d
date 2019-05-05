@@ -25,7 +25,7 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("~/Nextcloud/orgs/designops_tea.org" "~/Nextcloud/orgs/ops.org" "~/Nextcloud/orgs/ux_summit-2019_Q1.org" "~/Nextcloud/orgs/reading_list.org" "~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/design_club.org" "~/Nextcloud/orgs/coffee_talk.org" "~/Nextcloud/orgs/brian_1on1.org" "~/Nextcloud/orgs/framerx.org" "~/Nextcloud/orgs/savi.org" "~/Nextcloud/orgs/cdl.org" "~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
+    ("~/Nextcloud/orgs/ops.org" "~/Nextcloud/orgs/designops_tea.org" "~/Nextcloud/orgs/ux_summit-2019_Q1.org" "~/Nextcloud/orgs/reading_list.org" "~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/design_club.org" "~/Nextcloud/orgs/coffee_talk.org" "~/Nextcloud/orgs/brian_1on1.org" "~/Nextcloud/orgs/framerx.org" "~/Nextcloud/orgs/savi.org" "~/Nextcloud/orgs/cdl.org" "~/Nextcloud/orgs/designops_tea-2019-04.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
     (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
@@ -93,7 +93,7 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|"
+      '((sequence "TODO(t)" "MEETING(m)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; refile targets
 (setq org-refile-targets '(
@@ -125,7 +125,7 @@
               ("l" "link" entry (file org-default-notes-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ;("r" "respond" entry (file org-default-notes-file)
-	      ; "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
+	      ; "* TODO Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
               ;; Can't get :from or :subject from Gmail
 	      )))
 ; Export formats from Org mode
