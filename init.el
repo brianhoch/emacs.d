@@ -60,12 +60,6 @@
   :after evil
   :init (evil-collection-init))
 
-;; mu4e for email
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-(require 'mu4e)
-(setq mu4e-mu-binary "/usr/local/bin/mu")
-
-
 ;; check code syntax
 (use-package flycheck
   :ensure t
@@ -83,7 +77,7 @@
 
 ;; Set base font
 (add-to-list 'default-frame-alist
-                       '(font . "Input Mono-18"))
+                       '(font . "Input Mono-16"))
 ;; Force UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -93,12 +87,13 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "MEETING(m)" "WAITING(w)" "|"
+      '((sequence "TODO(t)" "MEETING(m)" "SLACK(s)" "PHONE(p)"
+		  "EMAIL(e)" "INPROGRESS(n)" "WAITING(w)" "|"
 		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
 ; refile targets
 (setq org-refile-targets '(
-			   (nil :maxlevel . 2)
-			   (org-agenda-files :maxlevel . 2)
+			   (nil :maxlevel . 6)
+			   (org-agenda-files :maxlevel . 6)
 			   ))
 (setq org-export-with-toc nil)
 ; org keys
