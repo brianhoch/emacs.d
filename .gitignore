@@ -6,3 +6,5 @@ elpa/
 backup/
 auto-save-list/
 /bookmarks
+\#*#
+*~
