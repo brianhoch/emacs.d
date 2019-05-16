@@ -7,6 +7,30 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+(setq my-packages
+      '(
+      evil-org
+      evil-magit
+      magit
+      evil-collection
+      evil-matchit
+      sentence-navigation
+      evil-surround
+      web-mode
+      exec-path-from-shell
+      flycheck
+      markdown-mode
+      quelpa-use-package
+      use-package
+      evil
+	))
+
+;; refresh package list on startup
+(when (not package-archive-contents)
+  (package-refresh-contents))
+;; Refer to https://stackoverflow.com/questions/14836958/updating-packages-in-emacs#14838150 for reference code to install missing packages.
+;; This other page may also prove useful reference: https://stackoverflow.com/questions/47997040/use-different-package-repository-in-emacs
+
 ;; Find executables
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
