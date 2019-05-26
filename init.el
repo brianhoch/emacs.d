@@ -55,9 +55,9 @@
  '(org-agenda-files
    (quote
     ("~/Nextcloud/orgs/savi.org" "~/Nextcloud/orgs/ops.org" "~/Nextcloud/orgs/designops_tea.org" "~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/design_club.org" "~/Nextcloud/orgs/coffee_talk.org" "~/Nextcloud/orgs/brian_1on1.org" "~/Nextcloud/orgs/framerx.org" "~/Nextcloud/orgs/cdl.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
-; '(package-selected-packages
-;   (quote
-;    (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
+ '(package-selected-packages
+   (quote
+    (quelpa-use-package markdown-mode flycheck exec-path-from-shell web-mode evil-surround sentence-navigation evil-matchit evil-collection evil-magit magit evil-org)))
  '(save-place t)
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
@@ -104,9 +104,9 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-;; Set base font
-(add-to-list 'default-frame-alist
-                       '(font . "Input Mono-16"))
+;; Set base font size
+(set-face-attribute 'default nil :height 160)
+
 ;; Force UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
