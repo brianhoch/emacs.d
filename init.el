@@ -5,9 +5,8 @@
                                  "https://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
-(package-initialize)
-
-(setq my-packages
+; list desired packages
+(setq package-list
       '(
       evil-org
       evil-magit
@@ -24,12 +23,18 @@
       use-package
       evil
 	))
+; activate packages
+(package-initialize)
 
-;; refresh package list on startup
+;; refresh available package list
 (when (not package-archive-contents)
   (package-refresh-contents))
-;; Refer to https://stackoverflow.com/questions/14836958/updating-packages-in-emacs#14838150 for reference code to install missing packages.
-;; This other page may also prove useful reference: https://stackoverflow.com/questions/47997040/use-different-package-repository-in-emacs
+
+; install missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+;; Refer to https://stackoverflow.com/questions/31079204/emacs-package-install-script-in-init-file. Also see https://stackoverflow.com/questions/14836958/updating-packages-in-emacs#14838150 for reference code to install missing packages.
 
 ;; Find executables
 (when (memq window-system '(mac ns x))
@@ -50,9 +55,9 @@
  '(org-agenda-files
    (quote
     ("~/Nextcloud/orgs/savi.org" "~/Nextcloud/orgs/ops.org" "~/Nextcloud/orgs/designops_tea.org" "~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/design_club.org" "~/Nextcloud/orgs/coffee_talk.org" "~/Nextcloud/orgs/brian_1on1.org" "~/Nextcloud/orgs/framerx.org" "~/Nextcloud/orgs/cdl.org" "~/Nextcloud/orgs/it.org" "~/Nextcloud/orgs/goals_2019.org" "~/Nextcloud/orgs/aaron_1on1.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
- '(package-selected-packages
-   (quote
-    (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
+; '(package-selected-packages
+;   (quote
+;    (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
  '(save-place t)
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
