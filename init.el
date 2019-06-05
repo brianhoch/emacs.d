@@ -87,9 +87,13 @@
 (setq org-directory "~/Nextcloud/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "MEETING(m)" "SLACK(s)" "PHONE(p)"
+      '((sequence "TODO(t)" "SLACK(s)" "PHONE(p)"
 		  "EMAIL(e)" "INPROGRESS(n)" "WAITING(w)" "|"
-		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)")))
+		  "DONE(d)" "DELEGATED(l)" "CANCELLED(c)" "MEETING(m)")))
+; priorities
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?D)
+(setq org-default-priority ?D)
 ; refile targets
 (setq org-refile-targets '(
 			   (nil :maxlevel . 6)
