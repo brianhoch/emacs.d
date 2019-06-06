@@ -5,7 +5,36 @@
                                  "https://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
+; list desired packages
+(setq package-list
+      '(
+      evil-org
+      evil-magit
+      magit
+      evil-collection
+      evil-matchit
+      sentence-navigation
+      evil-surround
+      web-mode
+      exec-path-from-shell
+      flycheck
+      markdown-mode
+      quelpa-use-package
+      use-package
+      evil
+	))
+; activate packages
 (package-initialize)
+
+;; refresh available package list
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+; install missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+;; Refer to https://stackoverflow.com/questions/31079204/emacs-package-install-script-in-init-file. Also see https://stackoverflow.com/questions/14836958/updating-packages-in-emacs#14838150 for reference code to install missing packages.
 
 ;; Find executables
 (when (memq window-system '(mac ns x))
@@ -28,7 +57,7 @@
     ("~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (evil-org evil-mu4e evil-magit magit evil-collection evil-tutor evil-matchit sentence-navigation evil-surround web-mode exec-path-from-shell flycheck markdown-mode quelpa-use-package use-package evil)))
+    (quelpa-use-package markdown-mode flycheck exec-path-from-shell web-mode evil-surround sentence-navigation evil-matchit evil-collection evil-magit magit evil-org)))
  '(save-place t)
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
@@ -75,9 +104,9 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-;; Set base font
-(add-to-list 'default-frame-alist
-                       '(font . "Input Mono-16"))
+;; Set base font size
+(set-face-attribute 'default nil :height 160)
+
 ;; Force UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)

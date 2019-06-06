@@ -9,3 +9,4 @@ auto-save-list/
 \#*#
 *~
 *.swp
+flycheck_init.el
