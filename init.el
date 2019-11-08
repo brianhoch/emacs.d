@@ -54,7 +54,7 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("~/Nextcloud/orgs/inbox.org" "~/Nextcloud/orgs/work.org" "~/Nextcloud/orgs/home.org" "~/Nextcloud/orgs/ministry.org")))
+    ("~/orgs/inbox.org" "~/orgs/work.org" "~/orgs/home.org" "~/orgs/ministry.org")))
  '(package-selected-packages
    (quote
     (quelpa-use-package markdown-mode flycheck exec-path-from-shell web-mode evil-surround sentence-navigation evil-matchit evil-collection evil-magit magit evil-org)))
@@ -113,7 +113,7 @@
 
 ;; Org mode settings ;;
 ; file locations and todo keywords
-(setq org-directory "~/Nextcloud/orgs/")
+(setq org-directory "~/orgs/")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-todo-keywords
       '((sequence "TODO(t)" "SLACK(s)" "PHONE(p)"
@@ -138,12 +138,12 @@
 (setq org-capture-templates
       (quote (("t" "todo" entry (file org-default-notes-file)
 	       "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+	      ("d" "done" entry (file org-default-notes-file)
+	       "* DONE %?\n%U\n%a\n" :clock-in f :clock-resume f)
 	      ("n" "note" entry (file org-default-notes-file)
 	       "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
 	      ("m" "Meeting" entry (file org-default-notes-file)
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("p" "Phone call" entry (file org-default-notes-file)
-               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+               "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
               ;; For Slack and Email captures copy url to item first
               ("s" "Slack" entry (file org-default-notes-file)
                "* SLACK %? :SLACK:\n%c\n%U" :clock-in t :clock-resume t)
@@ -152,9 +152,6 @@
               ;; Make sure you've got that link in the clipboard
               ("l" "link" entry (file org-default-notes-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
-              ;("r" "respond" entry (file org-default-notes-file)
-	      ; "* TODO Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t)
-              ;; Can't get :from or :subject from Gmail
 	      )))
 ; Export formats from Org mode
 (require 'ox-md) ;; Markdown
