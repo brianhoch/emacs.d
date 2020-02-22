@@ -22,6 +22,8 @@
       quelpa-use-package
       use-package
       evil
+      yasnippet
+      yasnippet-snippets
 	))
 ; activate packages
 (package-initialize)
@@ -57,7 +59,7 @@
     ("~/orgs/inbox.org" "~/orgs/work.org" "~/orgs/home.org" "~/orgs/ministry.org")))
  '(package-selected-packages
    (quote
-    (quelpa-use-package markdown-mode flycheck exec-path-from-shell web-mode evil-surround sentence-navigation evil-matchit evil-collection evil-magit magit evil-org)))
+    (yasnippet-snippets yasnippet quelpa-use-package markdown-mode flycheck exec-path-from-shell web-mode evil-surround sentence-navigation evil-matchit evil-collection evil-magit magit evil-org)))
  '(save-place t)
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
@@ -93,6 +95,10 @@
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+
+;; enable snippets
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;; Turn off button bar in GUI Emacs
 (tool-bar-mode -1)
